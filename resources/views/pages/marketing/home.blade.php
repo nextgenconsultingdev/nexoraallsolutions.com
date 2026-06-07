@@ -1,8 +1,66 @@
-<x-layouts.marketing :social-links="$socialLinks" :title="config('app.name')">
-    @php($hero = $content->get('hero'))
-    @php($aboutStory = $aboutContent->get('story'))
-    @php($contactIntro = $contactContent->get('intro'))
+@php
+    $pricingPlans = [
+        [
+            'name' => 'Found',
+            'summary' => 'Get found online. Look professional. Get the call.',
+            'price' => '$497.00',
+            'original_price' => null,
+            'monthly_price' => '$19.00',
+            'timeline' => 'Live in 5 business days',
+            'cta_label' => 'Get started',
+            'is_highlighted' => false,
+            'features' => [
+                'Professional 5-page website built for your specific trade',
+                'Shows up on Google searches — on-page SEO included',
+                'Contact form that texts you instantly when someone fills it out',
+                'WhatsApp + call button front and center on every page',
+                'Photo gallery to show your work and build trust',
+                'Google Maps so customers know exactly where you serve',
+                'Works perfectly on any phone — most of your customers are on mobile',
+                'Hosting fully managed — we handle everything, no tech headaches',
+                'Unlimited edits for 90 days after launch',
+            ],
+        ],
+        [
+            'name' => 'Booked',
+            'summary' => 'Stop losing leads to competitors. Get instant replies working for you 24/7.',
+            'price' => '$897.00',
+            'original_price' => null,
+            'monthly_price' => '$49.00',
+            'timeline' => 'Live in 1 week',
+            'cta_label' => 'Get started',
+            'is_highlighted' => true,
+            'features' => [
+                'Everything in Found',
+                'Instant auto-reply the moment a lead contacts you via SMS, WhatsApp, Facebook, or Instagram — even at 2am',
+                'Automated review requests sent after every completed job — get to 50+ Google reviews fast',
+                'Simple lead inbox — see every lead and every message in one place, right from your phone',
+                'Follow-up sequences that automatically chase leads so you don\'t have to',
+                'Monthly performance snapshot — calls received, leads captured, reviews earned',
+            ],
+        ],
+        [
+            'name' => 'Dominant',
+            'summary' => 'The complete growth machine. Run your entire business from your phone.',
+            'price' => '$1,297.00',
+            'original_price' => null,
+            'monthly_price' => '$89.00',
+            'timeline' => 'Live in 2 weeks',
+            'cta_label' => 'Get started',
+            'is_highlighted' => false,
+            'features' => [
+                'Everything in Booked',
+                'Online booking system — customers book jobs directly from your site, no phone tag',
+                'Google Calendar sync — your schedule stays up to date automatically',
+                'Automated estimate and quote delivery — send a professional quote by text in seconds, from anywhere',
+                'Appointment reminders — automated texts before every job cut no-shows dramatically',
+                'Priority support — direct access, fast response, we treat your business like our own',
+            ],
+        ],
+    ];
+@endphp
 
+<x-layouts.marketing :title="config('app.name')">
     {{-- ===================== HERO ===================== --}}
     <section id="home" class="scroll-mt-28 md:scroll-mt-32">
         <div class="relative min-h-[740px] overflow-hidden md:min-h-[860px]" data-reveal>
@@ -357,7 +415,7 @@
             <div
                 x-data="{
                     current: 0,
-                    total: {{ $pricingPlans->count() }},
+                    total: {{ count($pricingPlans) }},
                     prev() {
                         if (this.current > 0) {
                             this.current--;
@@ -421,7 +479,7 @@
                             @click="current = {{ $index }}; scrollTo({{ $index }})"
                             :class="current === {{ $index }} ? 'w-6 bg-brand-600 dark:bg-brand-400' : 'w-2 bg-slate-300 dark:bg-slate-600'"
                             class="h-2 rounded-full transition-all duration-300"
-                            aria-label="Go to {{ $pricingPlan->name }}"
+                            aria-label="Go to {{ $pricingPlan['name'] }}"
                         ></button>
                     @endforeach
                 </div>
@@ -506,9 +564,9 @@
         <div class="agency-container">
             <div class="agency-grid items-start lg:grid-cols-[0.85fr_1.15fr]">
                 <div class="space-y-6" data-reveal>
-                    <span class="agency-eyebrow">{{ $contactIntro?->eyebrow ?? 'Get started' }}</span>
-                    <h2 class="agency-subheading md:text-4xl">{{ $contactIntro?->title ?? 'Tell us about your business. We\'ll show you how to grow it.' }}</h2>
-                    <p class="agency-copy">{{ $contactIntro?->body ?? 'No pitch. No pressure. Just a real conversation about what it takes to fill your schedule and grow your revenue.' }}</p>
+                    <span class="agency-eyebrow">Get started</span>
+                    <h2 class="agency-subheading md:text-4xl">Tell us about your business. We'll show you how to grow it.</h2>
+                    <p class="agency-copy">No pitch. No pressure. Just a real conversation about what it takes to fill your schedule and grow your revenue.</p>
                     <div class="agency-card">
                         <p class="text-sm font-semibold text-slate-700 dark:text-slate-200">We work best with</p>
                         <ul class="mt-4 grid gap-3 text-sm text-slate-600 dark:text-slate-300">

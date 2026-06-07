@@ -1,6 +1,10 @@
-@props([
-    'socialLinks',
-])
+@php
+    $socialLinks = [
+        ['label' => 'LinkedIn', 'platform' => 'LinkedIn', 'url' => 'https://www.linkedin.com'],
+        ['label' => 'GitHub', 'platform' => 'GitHub', 'url' => 'https://github.com'],
+        ['label' => 'X / Twitter', 'platform' => 'X', 'url' => 'https://x.com'],
+    ];
+@endphp
 
 <footer class="mt-20 border-t border-slate-200/80 bg-slate-950 text-white dark:border-white/10">
     <div class="w-full px-5 py-14 sm:px-6 lg:px-8 lg:py-16">
@@ -14,13 +18,13 @@
                 <div class="flex items-center gap-4 text-slate-400">
                     @foreach ($socialLinks as $socialLink)
                         <a
-                            href="{{ $socialLink->url }}"
+                            href="{{ $socialLink['url'] }}"
                             target="_blank"
                             rel="noreferrer"
                             class="transition hover:text-brand-300"
-                            aria-label="{{ $socialLink->label }}"
+                            aria-label="{{ $socialLink['label'] }}"
                         >
-                            <x-marketing.social-icon :platform="$socialLink->platform" class="size-5" />
+                            <x-marketing.social-icon :platform="$socialLink['platform']" class="size-5" />
                         </a>
                     @endforeach
                 </div>

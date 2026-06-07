@@ -6,6 +6,12 @@
         ['label' => 'About', 'anchor' => 'about'],
         ['label' => 'Contact', 'anchor' => 'contact'],
     ];
+
+    $socialLinks = [
+        ['label' => 'LinkedIn', 'platform' => 'LinkedIn', 'url' => 'https://www.linkedin.com'],
+        ['label' => 'GitHub', 'platform' => 'GitHub', 'url' => 'https://github.com'],
+        ['label' => 'X / Twitter', 'platform' => 'X', 'url' => 'https://x.com'],
+    ];
 @endphp
 
 <header
@@ -36,15 +42,15 @@
             {{-- Right actions --}}
             <div class="flex items-center gap-3">
                 <div class="hidden items-center gap-3 md:flex">
-                    @foreach (($socialLinks ?? collect()) as $socialLink)
+                    @foreach ($socialLinks as $socialLink)
                         <a
-                            href="{{ $socialLink->url }}"
+                            href="{{ $socialLink['url'] }}"
                             target="_blank"
                             rel="noreferrer"
                             class="text-slate-500 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-300"
-                            aria-label="{{ $socialLink->label }}"
+                            aria-label="{{ $socialLink['label'] }}"
                         >
-                            <x-marketing.social-icon :platform="$socialLink->platform" class="size-4" />
+                            <x-marketing.social-icon :platform="$socialLink['platform']" class="size-4" />
                         </a>
                     @endforeach
                 </div>
@@ -97,15 +103,15 @@
 
             <div class="mt-4 flex items-center justify-between">
                 <div class="flex items-center gap-4">
-                    @foreach (($socialLinks ?? collect()) as $socialLink)
+                    @foreach ($socialLinks as $socialLink)
                         <a
-                            href="{{ $socialLink->url }}"
+                            href="{{ $socialLink['url'] }}"
                             target="_blank"
                             rel="noreferrer"
                             class="text-slate-500 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-300"
-                            aria-label="{{ $socialLink->label }}"
+                            aria-label="{{ $socialLink['label'] }}"
                         >
-                            <x-marketing.social-icon :platform="$socialLink->platform" class="size-5" />
+                            <x-marketing.social-icon :platform="$socialLink['platform']" class="size-5" />
                         </a>
                     @endforeach
                 </div>
