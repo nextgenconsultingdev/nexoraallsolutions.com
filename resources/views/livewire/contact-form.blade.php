@@ -2,10 +2,7 @@
     <form wire:submit="send" class="agency-card grid gap-5">
         <div class="grid gap-5 md:grid-cols-2">
             <div>
-                <label class="agency-label" for="name">
-                    <span data-lang="en">Your name</span>
-                    <span data-lang="es">Tu nombre</span>
-                </label>
+                <label class="agency-label" for="name">{{ __('form.name') }}</label>
                 <input wire:model="name" class="agency-input" id="name" name="name" type="text"
                     placeholder="John Smith">
                 @error('name')
@@ -14,10 +11,7 @@
             </div>
 
             <div>
-                <label class="agency-label" for="phone">
-                    <span data-lang="en">Phone number</span>
-                    <span data-lang="es">Número de teléfono</span>
-                </label>
+                <label class="agency-label" for="phone">{{ __('form.phone') }}</label>
                 <input wire:model="phone" class="agency-input" id="phone" name="phone" type="tel"
                     placeholder="(407) 555-0100">
                 @error('phone')
@@ -28,10 +22,7 @@
 
         <div class="grid gap-5 md:grid-cols-2">
             <div>
-                <label class="agency-label" for="email">
-                    <span data-lang="en">Email address</span>
-                    <span data-lang="es">Correo electrónico</span>
-                </label>
+                <label class="agency-label" for="email">{{ __('form.email') }}</label>
                 <input wire:model="email" class="agency-input" id="email" name="email" type="email"
                     placeholder="john@mycompany.com">
                 @error('email')
@@ -40,10 +31,7 @@
             </div>
 
             <div>
-                <label class="agency-label" for="company">
-                    <span data-lang="en">Business name</span>
-                    <span data-lang="es">Nombre del negocio</span>
-                </label>
+                <label class="agency-label" for="company">{{ __('form.company') }}</label>
                 <input wire:model="company" class="agency-input" id="company" name="company" type="text"
                     placeholder="Acme Corp">
                 @error('company')
@@ -53,15 +41,9 @@
         </div>
 
         <div>
-            <label class="agency-label" for="project_scope">
-                <span data-lang="en">What type of business do you have?</span>
-                <span data-lang="es">¿Qué tipo de negocio tienes?</span>
-            </label>
+            <label class="agency-label" for="project_scope">{{ __('form.project_scope') }}</label>
             <select wire:model="project_scope" class="agency-input" id="project_scope" name="project_scope">
-                <option value="">
-                    <span data-lang="en">Select your industry</span>
-                    <span data-lang="es">Selecciona tu industria</span>
-                </option>
+                <option value="">{{ __('form.industry_placeholder') }}</option>
                 <option value="E-commerce">E-commerce</option>
                 <option value="Restaurant / Food & Beverage">Restaurant / Food &amp; Beverage</option>
                 <option value="Health & Wellness">Health &amp; Wellness</option>
@@ -81,11 +63,8 @@
 
         <div>
             <label class="agency-label" for="message">
-                <span data-lang="en">What's your biggest challenge right now?</span>
-                <span data-lang="es">¿Cuál es tu mayor desafío ahora mismo?</span>
-                <span class="font-normal text-slate-400">
-                    (<span data-lang="en">optional</span><span data-lang="es">opcional</span>)
-                </span>
+                {{ __('form.message_label') }}
+                <span class="font-normal text-slate-400">({{ __('form.optional') }})</span>
             </label>
             <textarea wire:model="message" class="agency-input min-h-28" id="message" name="message"
                 placeholder="e.g. I need a website, I want to automate my follow-ups, I'm looking for a mobile app..."></textarea>
@@ -95,14 +74,8 @@
         </div>
 
         <div class="flex items-center justify-between gap-4">
-            <p class="agency-muted">
-                <span data-lang="en">We'll get back to you within 1 business day.</span>
-                <span data-lang="es">Te responderemos dentro de 1 día hábil.</span>
-            </p>
-            <x-ui.button type="submit">
-                <span data-lang="en">Get a free consultation</span>
-                <span data-lang="es">Obtén una consulta gratis</span>
-            </x-ui.button>
+            <p class="agency-muted">{{ __('form.response_time') }}</p>
+            <x-ui.button type="submit">{{ __('form.submit') }}</x-ui.button>
         </div>
     </form>
 </div>

@@ -15,7 +15,7 @@
     <div class="flex h-full flex-col gap-6">
         <div class="space-y-3">
             @if ($pricingPlan['is_highlighted'])
-                <span class="agency-eyebrow-gold">Most popular</span>
+                <span class="agency-eyebrow-gold">{{ __('pricing.most_popular') }}</span>
             @endif
 
             <div class="space-y-2">
@@ -30,10 +30,10 @@
             @endif
             <div class="flex items-end gap-2">
                 <span class="font-display text-4xl font-semibold text-slate-950 dark:text-white">{{ $pricingPlan['price'] }}</span>
-                <span class="pb-1 text-sm text-slate-500 dark:text-slate-400">one-time</span>
+                <span class="pb-1 text-sm text-slate-500 dark:text-slate-400">{{ __('pricing.one_time') }}</span>
             </div>
             @if ($pricingPlan['monthly_price'] ?? null)
-                <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">+ {{ $pricingPlan['monthly_price'] }}<span class="text-xs">/month</span></p>
+                <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">+ {{ $pricingPlan['monthly_price'] }}<span class="text-xs">{{ __('pricing.per_month') }}</span></p>
             @endif
         </div>
 

@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MarketingPageController::class, 'home'])->name('home');
 
+Route::prefix('es')->name('es.')->middleware('locale:es')->group(function () {
+    Route::get('/', [MarketingPageController::class, 'home'])->name('home');
+});
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
 });

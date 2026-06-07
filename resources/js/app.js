@@ -27,60 +27,6 @@ document.addEventListener('livewire:init', () => {
     });
 });
 
-const langStorageKey = 'nexora-lang';
-
-/**
- * Determines the active language by checking localStorage first,
- * then falling back to the browser's navigator.language.
- *
- * @returns {'en'|'es'} The resolved language code.
- */
-function resolveLang() {
-    const stored = window.localStorage.getItem(langStorageKey);
-
-    // Return the stored preference if it's a supported language.
-    if (stored === 'en' || stored === 'es') return stored;
-
-    // Fall back to the browser locale, defaulting to English.
-    return navigator.language?.toLowerCase().startsWith('es') ? 'es' : 'en';
-}
-
-/**
- * Applies a language to the document and updates all toggle buttons.
- * Persists the choice to localStorage so it survives page reloads.
- *
- * @param {'en'|'es'} lang - The language code to apply.
- * @returns {void}
- */
-function applyLang(lang) {
-    // Store on <html> so CSS/Blade templates can read it via data-lang.
-    document.documentElement.dataset.lang = lang;
-    window.localStorage.setItem(langStorageKey, lang);
-
-    // Show the label that matches the active language; hide the other.
-    document.querySelectorAll('[data-lang-toggle]').forEach((button) => {
-        button.querySelector('[data-lang-label="en"]')?.classList.toggle('hidden', lang !== 'en');
-        button.querySelector('[data-lang-label="es"]')?.classList.toggle('hidden', lang !== 'es');
-    });
-}
-
-/**
- * Initializes the language toggle by applying the resolved language and
- * attaching click listeners to every `[data-lang-toggle]` button.
- *
- * @returns {void}
- */
-function bootLangToggle() {
-    applyLang(resolveLang());
-
-    document.querySelectorAll('[data-lang-toggle]').forEach((button) => {
-        button.addEventListener('click', () => {
-            // Flip between the two supported languages on each click.
-            applyLang(document.documentElement.dataset.lang === 'en' ? 'es' : 'en');
-        });
-    });
-}
-
 const themeStorageKey = 'nexora-theme';
 
 /**
@@ -216,7 +162,6 @@ function bootBackToTop() {
 
 // Bootstrap all UI modules once the DOM is fully parsed.
 document.addEventListener('DOMContentLoaded', () => {
-    bootLangToggle();
     bootThemeToggle();
     bootRevealAnimations();
     bootBackToTop();
