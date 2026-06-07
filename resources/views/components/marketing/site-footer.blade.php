@@ -1,11 +1,3 @@
-@php
-    $socialLinks = [
-        ['label' => 'LinkedIn', 'platform' => 'LinkedIn', 'url' => 'https://www.linkedin.com'],
-        ['label' => 'GitHub', 'platform' => 'GitHub', 'url' => 'https://github.com'],
-        ['label' => 'X / Twitter', 'platform' => 'X', 'url' => 'https://x.com'],
-    ];
-@endphp
-
 <footer class="mt-20 border-t border-slate-200/80 bg-slate-950 text-white dark:border-white/10">
     <div class="w-full px-5 py-14 sm:px-6 lg:px-8 lg:py-16">
         <div class="mx-auto grid w-full max-w-7xl gap-10 lg:grid-cols-[1.2fr_0.8fr_0.8fr_0.8fr]">
