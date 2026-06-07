@@ -1,5 +1,4 @@
 @props([
-    'socialLinks' => collect(),
     'title' => null,
 ])
 
@@ -9,7 +8,7 @@
         @include('partials.head')
     </head>
     <body class="agency-shell">
-        <x-marketing.site-header :social-links="$socialLinks" />
+        <x-marketing.site-header />
 
         @if (session('success') || session('checkout_success') || session('checkout_error'))
             <div class="agency-container pt-28">
@@ -37,7 +36,7 @@
             </svg>
         </button>
 
-        <x-marketing.site-footer :social-links="$socialLinks" />
+        <x-marketing.site-footer />
         @fluxScripts
     </body>
 </html>

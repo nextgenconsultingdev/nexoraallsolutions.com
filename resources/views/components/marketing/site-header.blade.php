@@ -1,13 +1,3 @@
-@php
-    $links = [
-        ['label' => 'Services', 'anchor' => 'services'],
-        ['label' => 'Process', 'anchor' => 'process'],
-        ['label' => 'Pricing', 'anchor' => 'pricing'],
-        ['label' => 'About', 'anchor' => 'about'],
-        ['label' => 'Contact', 'anchor' => 'contact'],
-    ];
-@endphp
-
 <header
     x-data="{ open: false }"
     class="sticky inset-x-0 top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur dark:border-white/10 dark:bg-[#050c14]/90"
@@ -16,7 +6,7 @@
         <div class="flex items-center justify-between gap-4 py-1.5 md:py-2">
 
             {{-- Logo --}}
-            <a href="{{ route('home') }}#home">
+            <a href="{{ locale_route('home') }}#home">
                 <img src="/images/brand/NeXora_Logo.png" alt="{{ config('app.name') }}" class="h-[58px] w-auto dark:hidden">
                 <img src="/images/brand/NeXora_Logo_dark.png" alt="{{ config('app.name') }}" class="hidden h-[58px] w-auto dark:block">
             </a>
@@ -25,10 +15,10 @@
             <nav class="hidden items-center gap-6 lg:flex">
                 @foreach ($links as $link)
                     <a
-                        href="{{ route('home') }}#{{ $link['anchor'] }}"
+                        href="{{ locale_route('home') }}#{{ $link['anchor'] }}"
                         class="text-sm font-medium text-slate-600 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white"
                     >
-                        {{ $link['label'] }}
+                        {{ __($link['key']) }}
                     </a>
                 @endforeach
             </nav>
@@ -36,22 +26,27 @@
             {{-- Right actions --}}
             <div class="flex items-center gap-3">
                 <div class="hidden items-center gap-3 md:flex">
-                    @foreach (($socialLinks ?? collect()) as $socialLink)
+                    @foreach ($socialLinks as $socialLink)
                         <a
-                            href="{{ $socialLink->url }}"
+                            href="{{ $socialLink['url'] }}"
                             target="_blank"
                             rel="noreferrer"
                             class="text-slate-500 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-300"
-                            aria-label="{{ $socialLink->label }}"
+                            aria-label="{{ $socialLink['label'] }}"
                         >
-                            <x-marketing.social-icon :platform="$socialLink->platform" class="size-4" />
+                            <x-marketing.social-icon :platform="$socialLink['platform']" class="size-4" />
                         </a>
                     @endforeach
                 </div>
 
+                <div class="hidden h-4 w-px bg-slate-200 sm:block dark:bg-white/15"></div>
+
+                <x-marketing.lang-toggle class="hidden sm:inline-flex" />
                 <x-marketing.theme-toggle class="hidden sm:inline-flex" />
 
-                <x-ui.button href="{{ route('home') }}#contact" class="hidden md:inline-flex">Start a project</x-ui.button>
+                <x-ui.button href="{{ locale_route('home') }}#contact" class="hidden md:inline-flex">
+                    {{ __('nav.cta') }}
+                </x-ui.button>
 
                 {{-- Hamburger button (mobile only) --}}
                 <button
@@ -87,33 +82,34 @@
         <nav class="flex flex-col px-5 py-4">
             @foreach ($links as $link)
                 <a
-                    href="{{ route('home') }}#{{ $link['anchor'] }}"
+                    href="{{ locale_route('home') }}#{{ $link['anchor'] }}"
                     @click="open = false"
                     class="border-b border-slate-100 py-3.5 text-base font-medium text-slate-700 transition hover:text-brand-600 dark:border-white/5 dark:text-slate-200 dark:hover:text-brand-300"
                 >
-                    {{ $link['label'] }}
+                    {{ __($link['key']) }}
                 </a>
             @endforeach
 
             <div class="mt-4 flex items-center justify-between">
                 <div class="flex items-center gap-4">
-                    @foreach (($socialLinks ?? collect()) as $socialLink)
+                    @foreach ($socialLinks as $socialLink)
                         <a
-                            href="{{ $socialLink->url }}"
+                            href="{{ $socialLink['url'] }}"
                             target="_blank"
                             rel="noreferrer"
                             class="text-slate-500 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-300"
-                            aria-label="{{ $socialLink->label }}"
+                            aria-label="{{ $socialLink['label'] }}"
                         >
-                            <x-marketing.social-icon :platform="$socialLink->platform" class="size-5" />
+                            <x-marketing.social-icon :platform="$socialLink['platform']" class="size-5" />
                         </a>
                     @endforeach
                 </div>
+                <x-marketing.lang-toggle />
                 <x-marketing.theme-toggle />
             </div>
 
-            <x-ui.button href="{{ route('home') }}#contact" @click="open = false" class="mt-4 justify-center">
-                Start a project
+            <x-ui.button href="{{ locale_route('home') }}#contact" @click="open = false" class="mt-4 justify-center">
+                {{ __('nav.cta') }}
             </x-ui.button>
         </nav>
     </div>

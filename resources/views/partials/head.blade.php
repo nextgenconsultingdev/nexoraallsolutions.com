@@ -9,6 +9,11 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
+{{-- hreflang tags for bilingual SEO --}}
+<link rel="alternate" hreflang="en" href="{{ route('home') }}" />
+<link rel="alternate" hreflang="es" href="{{ route('es.home') }}" />
+<link rel="alternate" hreflang="x-default" href="{{ route('home') }}" />
+
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
