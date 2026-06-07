@@ -16,6 +16,15 @@
 
 <script>
     (() => {
+        const storageKey = 'nexora-lang';
+        const stored = window.localStorage.getItem(storageKey);
+        const lang = (stored === 'en' || stored === 'es')
+            ? stored
+            : (navigator.language?.toLowerCase().startsWith('es') ? 'es' : 'en');
+        document.documentElement.dataset.lang = lang;
+    })();
+
+    (() => {
         const storageKey = 'nexora-theme';
         const storedTheme = window.localStorage.getItem(storageKey);
         const resolvedTheme = storedTheme === 'light' || storedTheme === 'dark'

@@ -1,10 +1,10 @@
 @php
     $links = [
-        ['label' => 'Services', 'anchor' => 'services'],
-        ['label' => 'Process', 'anchor' => 'process'],
-        ['label' => 'Pricing', 'anchor' => 'pricing'],
-        ['label' => 'About', 'anchor' => 'about'],
-        ['label' => 'Contact', 'anchor' => 'contact'],
+        ['en' => 'Services',  'es' => 'Servicios', 'anchor' => 'services'],
+        ['en' => 'AI',        'es' => 'IA',         'anchor' => 'ai'],
+        ['en' => 'Pricing',   'es' => 'Precios',    'anchor' => 'pricing'],
+        ['en' => 'About',     'es' => 'Nosotros',   'anchor' => 'about'],
+        ['en' => 'Contact',   'es' => 'Contacto',   'anchor' => 'contact'],
     ];
 
     $socialLinks = [
@@ -34,7 +34,8 @@
                         href="{{ route('home') }}#{{ $link['anchor'] }}"
                         class="text-sm font-medium text-slate-600 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white"
                     >
-                        {{ $link['label'] }}
+                        <span data-lang="en">{{ $link['en'] }}</span>
+                        <span data-lang="es">{{ $link['es'] }}</span>
                     </a>
                 @endforeach
             </nav>
@@ -55,9 +56,15 @@
                     @endforeach
                 </div>
 
+                <div class="hidden h-4 w-px bg-slate-200 sm:block dark:bg-white/15"></div>
+
+                <x-marketing.lang-toggle class="hidden sm:inline-flex" />
                 <x-marketing.theme-toggle class="hidden sm:inline-flex" />
 
-                <x-ui.button href="{{ route('home') }}#contact" class="hidden md:inline-flex">Start a project</x-ui.button>
+                <x-ui.button href="{{ route('home') }}#contact" class="hidden md:inline-flex">
+                    <span data-lang="en">Let's Talk</span>
+                    <span data-lang="es">Hablemos</span>
+                </x-ui.button>
 
                 {{-- Hamburger button (mobile only) --}}
                 <button
@@ -97,7 +104,8 @@
                     @click="open = false"
                     class="border-b border-slate-100 py-3.5 text-base font-medium text-slate-700 transition hover:text-brand-600 dark:border-white/5 dark:text-slate-200 dark:hover:text-brand-300"
                 >
-                    {{ $link['label'] }}
+                    <span data-lang="en">{{ $link['en'] }}</span>
+                    <span data-lang="es">{{ $link['es'] }}</span>
                 </a>
             @endforeach
 
@@ -115,11 +123,13 @@
                         </a>
                     @endforeach
                 </div>
+                <x-marketing.lang-toggle />
                 <x-marketing.theme-toggle />
             </div>
 
             <x-ui.button href="{{ route('home') }}#contact" @click="open = false" class="mt-4 justify-center">
-                Start a project
+                <span data-lang="en">Let's Talk</span>
+                <span data-lang="es">Hablemos</span>
             </x-ui.button>
         </nav>
     </div>

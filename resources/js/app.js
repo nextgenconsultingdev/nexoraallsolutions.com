@@ -21,6 +21,34 @@ document.addEventListener('livewire:init', () => {
     });
 });
 
+const langStorageKey = 'nexora-lang';
+
+function resolveLang() {
+    const stored = window.localStorage.getItem(langStorageKey);
+    if (stored === 'en' || stored === 'es') return stored;
+    return navigator.language?.toLowerCase().startsWith('es') ? 'es' : 'en';
+}
+
+function applyLang(lang) {
+    document.documentElement.dataset.lang = lang;
+    window.localStorage.setItem(langStorageKey, lang);
+
+    document.querySelectorAll('[data-lang-toggle]').forEach((button) => {
+        button.querySelector('[data-lang-label="en"]')?.classList.toggle('hidden', lang !== 'en');
+        button.querySelector('[data-lang-label="es"]')?.classList.toggle('hidden', lang !== 'es');
+    });
+}
+
+function bootLangToggle() {
+    applyLang(resolveLang());
+
+    document.querySelectorAll('[data-lang-toggle]').forEach((button) => {
+        button.addEventListener('click', () => {
+            applyLang(document.documentElement.dataset.lang === 'en' ? 'es' : 'en');
+        });
+    });
+}
+
 const themeStorageKey = 'nexora-theme';
 
 function resolveTheme() {
@@ -106,6 +134,7 @@ function bootBackToTop() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    bootLangToggle();
     bootThemeToggle();
     bootRevealAnimations();
     bootBackToTop();

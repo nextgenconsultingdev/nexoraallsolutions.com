@@ -234,3 +234,7 @@ textarea:focus[data-flux-control],
 select:focus[data-flux-control] {
     @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
 }
+
+/* Language switching — mirrors the dark/light theme pattern */
+html[data-lang="en"] [data-lang="es"] { display: none; }
+html[data-lang="es"] [data-lang="en"] { display: none; }
